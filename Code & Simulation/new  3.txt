@@ -1,0 +1,83 @@
+sbit LCD_D7 at RB2_bit;
+sbit LCD_D6 at RB3_bit;
+sbit LCD_D5 at RB4_bit;
+sbit LCD_D4 at RB5_bit;
+sbit LCD_EN at RB6_bit;
+sbit LCD_RS at RB7_bit;
+
+sbit LCD_D7_Direction at TRISB2_bit;
+sbit LCD_D6_Direction at TRISB3_bit;
+sbit LCD_D5_Direction at TRISB4_bit;
+sbit LCD_D4_Direction at TRISB5_bit;
+sbit LCD_EN_Direction at TRISB6_bit;
+sbit LCD_RS_Direction at TRISB7_bit;
+
+#define FAN PIN_D1
+
+#define HEATER PORTD.RD7
+ //************************temperature variables****************
+  int temp;
+ char temper[7];
+ //**************************************************************
+
+ void READ_temp(void)
+    {
+     temp = ADC_Read(0);
+     temp = temp * 0.4887;
+
+    }
+
+
+ void data_converstion(void)
+ {
+     if(temp>=30)
+     {
+        temp = 20;
+        PORTD.RD7=1;
+        portd.f0=1;
+        PORTB.F0=1;
+        PORTB.F7=1;
+        //TRISD7_bit=1;
+        HEATER=1;
+     }
+     else
+     {
+       temp=temp;
+       HEATER=0;
+     }
+     inttostr(temp,temper);
+ }
+ void display1(void)
+ {
+
+
+  lcd_out(1,1,"TEMPERATURE=");
+
+  lcd_out(1,13, Ltrim(temper));
+  Lcd_Chr_Cp(0xdf);
+  Lcd_Chr_Cp('C');
+  Lcd_Chr_Cp(' ');
+
+ }
+
+void main()
+{
+ ADC_Init();
+ Lcd_Init();
+ TRISD7_bit=0;  
+ HEATER=0;                       // Initialize LCD
+ Lcd_Cmd(_LCD_CLEAR);               // Clear display
+ lcd_cmd(_LCD_CURSOR_OFF);
+ lcd_out(1,4,"DIGITAL TEMPERATURE");
+ lcd_out(2,6,"SENSOR");
+ delay_ms(1000);
+Lcd_Cmd(_LCD_CLEAR);               // Clear display
+
+ while(1)
+ {
+
+ READ_temp();
+ data_converstion();
+ display1();
+ }
+}
