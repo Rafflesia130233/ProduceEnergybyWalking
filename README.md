@@ -1,0 +1,6 @@
+# ProduceEnergybyWalking
+Power Generation System from Human Footstep Using Microcontroller
+
+With this alarming rate of demand, we need other alternative source of electricity. A number of research is ongoing to find out alternative power generation source. Some of them need other energy source, some other need expensive procedure. In this situation, if human activity can produce electricity that would be a significant contribution to the research of power generation from alternative sources. Especially in over populated area of the world and in public places for example, bus or train stations, market where every minute couple of hundred people walk by. This collective people’s footsteps can be used for power generation without causing any harm to people and environment.  In this paper, the way of generating power from human footsteps using piezo electric technology has been described. If piezo sensor can be structured on floor and human walks on the floor, the electrical energy produced by the pressure of the footsteps is captured by floor sensors and converted to an electrical charge by piezo transducers, then stored and used as a power source. In this paper, the details of the complete procedure of power generation using piezo electric technology has been described.
+
+For more details read Report-M.docx
